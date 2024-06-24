@@ -1,22 +1,19 @@
 import { useState } from "react";
 
 export default function Login() {
+  const [userDetails, setUserDetails] = useState({
+    enteredEmail: "",
+    enteredPassword: "",
+  });
 
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [enteredPassword, setEnteredPassword] = useState("");
-
-  const handleEmailChange = (event) => {
-    setEnteredEmail(event.target.value);
-  }
-
-  const handlePasswordChange = (event) => {
-    setEnteredPassword(event.target.value);
-  }
+  const handleInputChange = (identifier, value) => {
+    setUserDetails((prev) => ({ ...prev, [identifier]: value }));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(enteredEmail, enteredPassword);
-  }
+    console.log(userDetails.enteredEmail, userDetails.enteredPassword);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -25,12 +22,24 @@ export default function Login() {
       <div className="control-row">
         <div className="control no-margin">
           <label htmlFor="email">Email</label>
-          <input value={enteredEmail} onChange={handleEmailChange} id="email" type="email" name="email" />
+          <input
+            value={userDetails.enteredEmail}
+            onChange={(event) => handleInputChange("enteredEmail" ,event.target.value)}
+            id="email"
+            type="email"
+            name="email"
+          />
         </div>
 
         <div className="control no-margin">
           <label htmlFor="pjassword">Password</label>
-          <input value={enteredPassword} onChange={handlePasswordChange} id="password" type="password" name="password" />
+          <input
+            value={userDetails.enteredPassword}
+            onChange={(event) => handleInputChange("enteredPassword" ,event.target.value)}
+            id="password"
+            type="password"
+            name="password"
+          />
         </div>
       </div>
 
